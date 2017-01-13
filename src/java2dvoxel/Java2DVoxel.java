@@ -11,11 +11,71 @@ package java2dvoxel;
  */
 public class Java2DVoxel {
 
+    // Variables
+    public static Engine engine;
+    public static boolean isRunning;
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        isRunning = true;
+        engine = new Engine();
     }
     
+    // Handles ticks, rendering, and timers
+    public static class Engine {
+        
+        // Variables
+        public byte fps = 0;
+        public long lastFps = 0;
+        public int fpsCap = 60;
+        public long lastTime = System.nanoTime(), currentTime = 0, optimalTime = 1000000000 / fpsCap;
+        private java.util.Timer timer;
+        
+        // Engine core
+        public Engine() {
+            timer = new java.util.Timer();
+            timer.schedule(new EngineLoop(), 0, (lastTime - System.nanoTime() + optimalTime) / 1000000);
+        }
+        
+        public class EngineLoop extends java.util.TimerTask {            
+            public void run() {
+                long now = System.nanoTime();
+                long elapsedTime = now - lastTime; 
+                lastTime = now;
+                double delta = elapsedTime / ((double)optimalTime);
+
+                //FPS Counter
+                lastFps += elapsedTime;
+                fps++;
+
+                if(lastFps >= 1000000000) {
+                    System.out.println("FPS: " + fps);
+                    lastFps = 0;
+                    fps = 0;
+                }
+                
+                update(delta);
+                render();
+                
+                if(!isRunning) {
+                    timer.cancel();
+                }
+            }
+        }
+    
+        // Update the engine logic
+        public void update(double delta) {
+            // Jpanel for ui and buttons
+        }
+        
+        // Render to the screen
+        public void render() {
+            // render 2d dynamic list where layers are represented by an object's index in the list
+            // [x][y] = ObjectList. So each x and y coord contains data
+            // Idea: http://gamedev.stackexchange.com/questions/35829/drawing-graphics-in-java-game
+        }
+    }
+
 }
