@@ -7,7 +7,7 @@ package java2dvoxel;
 
 /**
  *
- * @author kali10
+ * @author Kristopher Ali
  */
 public class Java2DVoxel {
 
@@ -33,12 +33,17 @@ public class Java2DVoxel {
         public long lastTime = System.nanoTime(), currentTime = 0, optimalTime = 1000000000 / fpsCap;
         private java.util.Timer timer;
         
-        // Engine core
+        /**
+         * Engine core; starts a timer to loop the engine.
+         */
         public Engine() {
             timer = new java.util.Timer();
             timer.schedule(new EngineLoop(), 0, (lastTime - System.nanoTime() + optimalTime) / 1000000);
         }
         
+        /**
+         * Contains the engine's loop.
+         */
         public class EngineLoop extends java.util.TimerTask {            
             public void run() {
                 long now = System.nanoTime();
@@ -65,12 +70,17 @@ public class Java2DVoxel {
             }
         }
     
-        // Update the engine logic
+        /**
+         * Update the engine logic
+         * @param delta Current delta time.
+         */
         public void update(double delta) {
             // Jpanel for ui and buttons
         }
         
-        // Render to the screen
+        /**
+         * Render to the screen (may be moved to the Renderer class.)
+         */
         public void render() {
             // render 2d dynamic list where layers are represented by an object's index in the list
             // [x][y] = ObjectList. So each x and y coord contains data
