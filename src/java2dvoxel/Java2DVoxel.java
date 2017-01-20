@@ -15,6 +15,9 @@ public class Java2DVoxel {
     public static Engine engine;
     public static boolean isRunning;
     
+    // Objects
+    public static Renderer renderer = new Renderer();
+    
     /**
      * @param args the command line arguments
      */
@@ -85,6 +88,9 @@ public class Java2DVoxel {
             // render 2d dynamic list where layers are represented by an object's index in the list
             // [x][y] = ObjectList. So each x and y coord contains data
             // Idea: http://gamedev.stackexchange.com/questions/35829/drawing-graphics-in-java-game
+            
+            renderer.draw();
+            renderer.x += 1; // test fps
         }
     }
 

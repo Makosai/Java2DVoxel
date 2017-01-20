@@ -11,5 +11,7 @@ package java2dvoxel;
  * @author Kristopher Ali
  */
 public class GameObject {
-    
+    public GameObject() {
+        
+    }
 }
