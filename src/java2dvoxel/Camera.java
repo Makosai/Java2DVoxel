@@ -7,13 +7,14 @@
 package java2dvoxel;
 
 /**
- * Data on a specific object; such as sprite, name, and location.
+ *
  * @author Kristopher Ali
  */
-public class GameObject {
-    public int x = 0, y = 0;
+public class Camera {
+    public GameObject follow;
+    public int x, y;
     
-    public GameObject() {
-        
+    public Camera(GameObject mob) {
+        follow = mob;
     }
 }

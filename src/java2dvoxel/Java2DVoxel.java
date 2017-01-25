@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package java2dvoxel;
+import java2dvoxel.Enums.Directions;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Java2DVoxel {
     public static boolean isRunning;
     
     // Objects
+    public static Keymapping keymapping = new Keymapping();
     public static Renderer renderer = new Renderer();
     
     /**
@@ -90,7 +92,7 @@ public class Java2DVoxel {
             // Idea: http://gamedev.stackexchange.com/questions/35829/drawing-graphics-in-java-game
             
             renderer.draw();
-            renderer.x += 1; // test fps
+            //renderer.controller.step(Directions.EAST); // test fps
         }
     }
 

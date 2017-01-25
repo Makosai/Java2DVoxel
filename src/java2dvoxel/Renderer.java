@@ -19,10 +19,10 @@ import java.awt.Graphics2D;
  * @author Kristopher Ali
  */
 public class Renderer extends JFrame {
-    public ArrayList<Map> maps = new ArrayList<>();
-    public GameObject player = new GameObject();
-    
-    public int x = 0;
+    public static ArrayList<Map> maps = new ArrayList<>();
+    public static GameObject player = new GameObject();
+    public static Player controller = new Player();
+    public static Camera cam = new Camera(player);
     
     // Configurations
     int windowWidth = 500, windowHeight = 500;
@@ -44,12 +44,14 @@ public class Renderer extends JFrame {
         setResizable(RESIZABLE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+        setFocusable(true);
         
         insets = getInsets();
         setSize(insets.left + windowWidth + insets.right, insets.top + windowHeight + insets.bottom);
         
         backBuffer = new BufferedImage(windowWidth, windowHeight, BufferedImage.TYPE_INT_RGB);
         //input = new InputHandler(this);
+        addKeyListener(Java2DVoxel.keymapping);
     }
     
     void draw() {
@@ -60,7 +62,7 @@ public class Renderer extends JFrame {
         bbg.fillRect(0, 0, windowWidth, windowHeight);
         
         bbg.setColor(Color.BLACK);
-        bbg.drawOval(x, 10, 20, 20);
+        bbg.drawOval(cam.x, cam.y, 20, 20);
         
         g.drawImage(backBuffer, insets.left, insets.top, this);
     }
