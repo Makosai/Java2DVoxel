@@ -12,8 +12,13 @@ package java2dvoxel;
  */
 public class GameObject {
     public int x = 0, y = 0;
+    public Sprite sprite;
     
     public GameObject() {
         
+    }
+    
+    public GameObject(Sprite newSprite) {
+        sprite = newSprite;
     }
 }

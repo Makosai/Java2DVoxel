@@ -14,4 +14,8 @@ public class Enums {
     public enum Directions {
         NORTH, SOUTH, EAST, WEST
     }
+    
+    public enum DataTypes {
+        MAP
+    }
 }

@@ -36,6 +36,7 @@ public class Renderer extends JFrame {
      */
     public Renderer() {
         initialize();
+        generateMap(50,50);
     }
     
     final void initialize() {
@@ -86,5 +87,21 @@ public class Renderer extends JFrame {
      */
     public void addGui(int x, int y, int layer) {
         
+    }
+    
+    /**
+     * Generates a randomized map.
+     * TODO: Make it random.
+     * @param xSize How large the map is on the x-axis.
+     * @param ySize How large the map is on the y-axis.
+     */
+    public final void generateMap(int xSize, int ySize) {
+        Map newMap = new Map(xSize, ySize);
+        
+        Tile newTile1 = new Tile();
+        GameObject newGo1 = new GameObject(new Sprite("rsc/tile.png"));
+        newTile1.data.add(newGo1);
+        
+        maps.add(newMap);
     }
 }
