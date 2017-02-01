@@ -10,12 +10,6 @@ package java2dvoxel;
  *
  * @author Kristopher Ali
  */
-public class Enums {
-    public enum Directions {
-        NORTH, SOUTH, EAST, WEST
-    }
-    
-    public enum DataTypes {
-        MAP
-    }
+public class Constants {
+    public static final int WORLD_SIZE = 32; // The standard size of most sprites in this project.
 }

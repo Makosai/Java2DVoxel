@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package java2dvoxel;
+import java.io.File;
 import java2dvoxel.Enums.Directions;
 
 /**
@@ -24,6 +25,7 @@ public class Java2DVoxel {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //System.out.println(new File("").getAbsolutePath());
         isRunning = true;
         engine = new Engine();
     }
@@ -44,6 +46,8 @@ public class Java2DVoxel {
         public Engine() {
             timer = new java.util.Timer();
             timer.schedule(new EngineLoop(), 0, (lastTime - System.nanoTime() + optimalTime) / 1000000);
+        
+            renderer.generateMap(50,50);
         }
         
         /**

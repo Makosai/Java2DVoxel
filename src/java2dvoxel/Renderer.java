@@ -58,11 +58,23 @@ public class Renderer extends JFrame {
         Graphics g = getGraphics();
         Graphics bbg = backBuffer.getGraphics();
         
-        bbg.setColor(Color.WHITE);
+        bbg.setColor(Color.BLACK);
         bbg.fillRect(0, 0, windowWidth, windowHeight);
         
-        bbg.setColor(Color.BLACK);
-        bbg.drawOval(cam.x, cam.y, 20, 20);
+        if(maps.size() > 0) {
+            Map map = maps.get(0);
+            for(Tile[] x : map.data) {
+                for(Tile y : x) {
+                    if(y != null && y.data.size() > 0) {
+                        y.data.get(0).draw();
+                        System.out.println("drew");
+                    }
+                }
+            }
+        }
+        
+        //bbg.drawOval(cam.x, cam.y, 32, 32);
+        controller.draw();
         
         g.drawImage(backBuffer, insets.left, insets.top, this);
     }
@@ -86,5 +98,23 @@ public class Renderer extends JFrame {
      */
     public void addGui(int x, int y, int layer) {
         
+    }
+    
+    /**
+     * Generates a randomized map.
+     * TODO: Make it random.
+     * @param xSize How large the map is on the x-axis.
+     * @param ySize How large the map is on the y-axis.
+     */
+    public final void generateMap(int xSize, int ySize) {
+        Map newMap = new Map(xSize, ySize);
+        
+        Tile newTile1 = new Tile();
+        GameObject newGo1 = new GameObject(new Sprite("rsc/tile.png"));
+        newTile1.data.add(newGo1);
+        
+        newMap.data[0][0] = newTile1;
+        
+        maps.add(newMap);
     }
 }

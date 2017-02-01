@@ -12,8 +12,19 @@ package java2dvoxel;
  */
 public class GameObject {
     public int x = 0, y = 0;
+    public Sprite sprite;
     
     public GameObject() {
         
     }
+    
+    public GameObject(Sprite newSprite) {
+        sprite = newSprite;
+    }
+    
+    Renderer renderer = Java2DVoxel.renderer;
+    public void draw() {
+        renderer.backBuffer.getGraphics().drawImage(sprite.getSprite().getImage(), x * Constants.WORLD_SIZE, y * Constants.WORLD_SIZE, renderer);
+    }
+    
 }

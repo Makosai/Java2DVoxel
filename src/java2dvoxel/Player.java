@@ -13,6 +13,7 @@ import java2dvoxel.Enums.Directions;
  */
 public class Player {
     Renderer renderer = Java2DVoxel.renderer;
+    Sprite sprite = new Sprite("rsc/block.png");
     
     public void changePos(int x, int y) {
         if(x != 0) {
@@ -49,5 +50,11 @@ public class Player {
                 changePos(-1, 0);
                 break;
         }
+    }
+    
+    public void draw() {
+        if(renderer == null) {renderer = Java2DVoxel.renderer; return;} // Just renew the renderer. This should be fixed in the future (more neat).
+        else System.out.println(2);
+        renderer.backBuffer.getGraphics().drawImage(sprite.getSprite().getImage(), renderer.player.x * Constants.WORLD_SIZE, renderer.player.y * Constants.WORLD_SIZE, renderer);
     }
 }
