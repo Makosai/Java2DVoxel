@@ -25,7 +25,8 @@ public class Renderer extends JFrame {
     public static Camera cam = new Camera(player);
     
     // Configurations
-    int windowWidth = 500, windowHeight = 500;
+    final int globalSize = Constants.WORLD_SIZE * ((Constants.VIEW_SIZE * 4) + 1);
+    int windowWidth = globalSize, windowHeight = globalSize;
     final boolean RESIZABLE = true;
     Insets insets;
     //InputHandler input;
@@ -58,7 +59,7 @@ public class Renderer extends JFrame {
         Graphics g = getGraphics();
         Graphics bbg = backBuffer.getGraphics();
         
-        bbg.setColor(Color.BLACK);
+        bbg.setColor(Color.GREEN);
         bbg.fillRect(0, 0, windowWidth, windowHeight);
         
         if(maps.size() > 0) {

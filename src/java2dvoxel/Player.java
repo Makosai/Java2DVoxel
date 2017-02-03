@@ -5,6 +5,8 @@
  */
 
 package java2dvoxel;
+import java.awt.Dimension;
+import java.awt.Image;
 import java2dvoxel.Enums.Directions;
 
 /**
@@ -54,7 +56,20 @@ public class Player {
     
     public void draw() {
         if(renderer == null) {renderer = Java2DVoxel.renderer; return;} // Just renew the renderer. This should be fixed in the future (more neat).
-        else System.out.println(2);
-        renderer.backBuffer.getGraphics().drawImage(sprite.getSprite().getImage(), renderer.player.x * Constants.WORLD_SIZE, renderer.player.y * Constants.WORLD_SIZE, renderer);
+        
+        boolean eyed = true; // temporary, indicates that this object is being watched by the camera so center it.
+        Dimension dim = renderer.getSize();
+        Image img = sprite.getSprite().getImage();
+        int drawX = (dim.width / 2) - (img.getWidth(renderer) / 2) - 8, drawY = (dim.width / 2) - (img.getHeight(renderer) / 2) - 8;
+        if(!eyed) {
+            drawX = (renderer.player.x * Constants.WORLD_SIZE) - (renderer.cam.x * Constants.WORLD_SIZE); //renderer.player.x * Constants.WORLD_SIZE;
+            drawY = (renderer.player.y * Constants.WORLD_SIZE) - (renderer.cam.y * Constants.WORLD_SIZE); //Renderer.player.y * Constants.WORLD_SIZE;
+        }
+        renderer.backBuffer.getGraphics().drawImage(
+                img,
+                drawX,
+                drawY,
+                renderer
+        );
     }
 }

@@ -12,4 +12,5 @@ package java2dvoxel;
  */
 public class Constants {
     public static final int WORLD_SIZE = 32; // The standard size of most sprites in this project.
+    public static final int VIEW_SIZE = 7;
 }
