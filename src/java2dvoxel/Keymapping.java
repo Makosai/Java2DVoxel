@@ -81,7 +81,7 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
     }
 
     /** Handle the key released event from the text field. */
-    public void keyReleased(KeyEvent e) {
+    public synchronized void keyReleased(KeyEvent e) {
         pressed.remove(e.getKeyChar());
         System.out.println(e.getKeyChar() + " has been released.");
         Java2DVoxel.renderer.controller.move(1, 1);
