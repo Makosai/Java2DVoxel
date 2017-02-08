@@ -14,7 +14,7 @@ import java.awt.Image;
  * @author Kristopher Ali
  */
 public class GameObject {
-    public int x = 0, y = 0;
+    public int x = 0, y = 0, z = 0;
     public Sprite sprite;
     
     public GameObject() {
@@ -25,6 +25,19 @@ public class GameObject {
         sprite = newSprite;
     }
     
+    public GameObject(int x, int y, Sprite newSprite) {
+        this.x = x;
+        this.y = y;
+        sprite = newSprite;
+    }
+    
+    public GameObject(int x, int y, int z, Sprite newSprite) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        sprite = newSprite;
+    }
+    
     Renderer renderer = Java2DVoxel.renderer;
     public void draw() {
         boolean eyed = false; // temporary, indicates that this object is being watched by the camera so center it.
@@ -32,8 +45,8 @@ public class GameObject {
         Image img = sprite.getSprite().getImage();
         int drawX = (dim.width / 2) - (img.getWidth(renderer) / 2) - 8, drawY = (dim.width / 2) - (img.getHeight(renderer) / 2) - 8;
         if(!eyed) {
-            drawX = (x * Constants.WORLD_SIZE) - (renderer.cam.x * Constants.WORLD_SIZE); //renderer.player.x * Constants.WORLD_SIZE;
-            drawY = (y * Constants.WORLD_SIZE) - (renderer.cam.y * Constants.WORLD_SIZE); //Renderer.player.y * Constants.WORLD_SIZE;
+            drawX = (-((renderer.cam.x - x) - (Constants.VIEW_SIZE * 2)) * Constants.WORLD_SIZE); //renderer.player.x * Constants.WORLD_SIZE;
+            drawY = (-((renderer.cam.y - y) - (Constants.VIEW_SIZE * 2)) * Constants.WORLD_SIZE); //Renderer.player.y * Constants.WORLD_SIZE;
         }
         renderer.backBuffer.getGraphics().drawImage(
                 img,

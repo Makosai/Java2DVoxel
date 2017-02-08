@@ -12,8 +12,11 @@ package java2dvoxel;
  */
 public class Map {
     public Tile[][] data;
+    public int sizeX, sizeY;
     
     public Map(int sizeX, int sizeY) {
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
         data = new Tile[sizeX][sizeY];
     }
 }

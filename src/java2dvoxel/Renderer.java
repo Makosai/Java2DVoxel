@@ -114,7 +114,12 @@ public class Renderer extends JFrame {
         GameObject newGo1 = new GameObject(new Sprite("rsc/tile.png"));
         newTile1.data.add(newGo1);
         
+        Tile newTile2 = new Tile();
+        GameObject newGo2 = new GameObject(5, 5, new Sprite("rsc/block.png"));
+        newTile2.data.add(newGo2);
+        
         newMap.data[0][0] = newTile1;
+        newMap.data[5][5] = newTile2;
         
         maps.add(newMap);
     }

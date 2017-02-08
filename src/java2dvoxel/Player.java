@@ -15,18 +15,34 @@ import java2dvoxel.Enums.Directions;
  */
 public class Player {
     Renderer renderer = Java2DVoxel.renderer;
-    Sprite sprite = new Sprite("rsc/block.png");
+    Sprite sprite = new Sprite("rsc/mob.png");
     
     public void changePos(int x, int y) {
         if(x != 0) {
             renderer.player.x += x;
+            if(renderer.player.x > renderer.maps.get(renderer.player.z).sizeX) {
+                //renderer.player.x = renderer.maps.get(renderer.player.z).sizeX;
+            }
+            if(renderer.player.x < 0) {
+                //renderer.player.x = 0;
+            }
             renderer.cam.x = renderer.player.x;
         }
         
         if(y != 0) {
             renderer.player.y += y;
+            if(renderer.player.y > renderer.maps.get(renderer.player.z).sizeY) {
+                //renderer.player.y = renderer.maps.get(renderer.player.z).sizeY;
+            }
+            if(renderer.player.y < 0) {
+                //renderer.player.y = 0;
+            }
             renderer.cam.y = renderer.player.y;
         }
+    }
+    
+    public void wrapPlayer() {
+        
     }
     
     public void move(int x, int y) {
