@@ -24,7 +24,7 @@ public class Player {
                 //renderer.player.x = renderer.maps.get(renderer.player.z).sizeX;
             }
             if(renderer.player.x < 0) {
-                //renderer.player.x = 0;
+                renderer.player.x = 0;
             }
             renderer.cam.x = renderer.player.x;
         }
@@ -35,7 +35,7 @@ public class Player {
                 //renderer.player.y = renderer.maps.get(renderer.player.z).sizeY;
             }
             if(renderer.player.y < 0) {
-                //renderer.player.y = 0;
+                renderer.player.y = 0;
             }
             renderer.cam.y = renderer.player.y;
         }
