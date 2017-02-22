@@ -96,7 +96,6 @@ public class Java2DVoxel {
             // Idea: http://gamedev.stackexchange.com/questions/35829/drawing-graphics-in-java-game
             
             renderer.draw();
-            //renderer.controller.step(Directions.EAST); // test fps
         }
     }
 

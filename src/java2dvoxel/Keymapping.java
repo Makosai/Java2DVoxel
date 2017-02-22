@@ -20,7 +20,8 @@ import java2dvoxel.Enums.Directions;
  */
 public class Keymapping extends JFrame implements KeyListener, ActionListener {
     // Set of currently pressed keys
-    private final Set<Character> pressed = new HashSet<Character>();
+    private final Set<Character> charPressed = new HashSet<Character>();
+    private final Set<Integer> codePressed = new HashSet<Integer>();
     
     /** Handle the key typed event from the text field. */
     public void keyTyped(KeyEvent e) {
@@ -29,18 +30,15 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
 
     /** Handle the key pressed event from the text field. */
     public synchronized void keyPressed(KeyEvent e) {
-        pressed.add(e.getKeyChar());
+        charPressed.add(e.getKeyChar());
         
-        for(Character key : pressed) {
+        for(Character key : charPressed) {
             switch(key) {
                 // Movement
                 case 'w':
                     Java2DVoxel.renderer.controller.step(Directions.NORTH);
                     break;
                 case 'W':
-                    Java2DVoxel.renderer.controller.step(Directions.NORTH);
-                    break;
-                case KeyEvent.VK_UP:
                     Java2DVoxel.renderer.controller.step(Directions.NORTH);
                     break;
 
@@ -50,19 +48,12 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
                 case 'A':
                     Java2DVoxel.renderer.controller.step(Directions.WEST);
                     break;
-                case KeyEvent.VK_LEFT:
-                    Java2DVoxel.renderer.controller.step(Directions.WEST);
-                    break;
 
                 case 's':
                     Java2DVoxel.renderer.controller.step(Directions.SOUTH);
                     break;
                 case 'S':
                     Java2DVoxel.renderer.controller.step(Directions.SOUTH);
-                    break;
-                case KeyEvent.VK_DOWN:
-                    Java2DVoxel.renderer.controller.step(Directions.WEST);
-                    break;
 
                 case 'd':
                     Java2DVoxel.renderer.controller.step(Directions.EAST);
@@ -70,8 +61,34 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
                 case 'D':
                     Java2DVoxel.renderer.controller.step(Directions.EAST);
                     break;
-                case KeyEvent.VK_RIGHT:
+                
+                default:
+                    charPressed.remove(e.getKeyChar());
+                    codePressed.add(e.getKeyCode());
+                    break;
+            }
+        }
+        
+        for(Integer key : codePressed) {
+            switch(key) {
+                case KeyEvent.VK_UP:
+                    Java2DVoxel.renderer.controller.step(Directions.NORTH);
+                    break;
+
+                case KeyEvent.VK_LEFT:
                     Java2DVoxel.renderer.controller.step(Directions.WEST);
+                    break;
+
+                case KeyEvent.VK_DOWN:
+                    Java2DVoxel.renderer.controller.step(Directions.SOUTH);
+                    break;
+
+                case KeyEvent.VK_RIGHT:
+                    Java2DVoxel.renderer.controller.step(Directions.EAST);
+                    break;
+
+                default:
+                    codePressed.remove(e.getKeyCode());
                     break;
             }
         }
@@ -82,7 +99,14 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
 
     /** Handle the key released event from the text field. */
     public synchronized void keyReleased(KeyEvent e) {
-        pressed.remove(e.getKeyChar());
+        if(charPressed.contains(e.getKeyChar())) {
+            charPressed.remove(e.getKeyChar());
+        }
+        
+        if(codePressed.contains(e.getKeyCode())) {
+            codePressed.remove(e.getKeyCode());
+        }
+
         System.out.println(e.getKeyChar() + " has been released.");
         Java2DVoxel.renderer.controller.move(1, 1);
     }
