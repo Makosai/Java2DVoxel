@@ -14,6 +14,7 @@ import java.awt.Image;
  * @author Kristopher Ali
  */
 public class GameObject {
+    boolean eyed = false;
     public int x = 0, y = 0, z = 0;
     public Sprite sprite;
     
@@ -23,6 +24,8 @@ public class GameObject {
     
     public GameObject(Sprite newSprite) {
         sprite = newSprite;
+        
+        System.out.println(eyed);
     }
     
     public GameObject(int x, int y, Sprite newSprite) {
@@ -38,9 +41,12 @@ public class GameObject {
         sprite = newSprite;
     }
     
-    Renderer renderer = Java2DVoxel.renderer;
+    Renderer renderer;
     public void draw() {
-        boolean eyed = false; // temporary, indicates that this object is being watched by the camera so center it.
+        if(renderer == null) { renderer = Java2DVoxel.renderer; return; }
+        if(sprite == null) {return; }
+        
+        // temporary, indicates that this object is being watched by the camera so center it.
         Dimension dim = renderer.getSize();
         Image img = sprite.getSprite().getImage();
         int drawX = (dim.width / 2) - (img.getWidth(renderer) / 2) - 8, drawY = (dim.width / 2) - (img.getHeight(renderer) / 2) - 8;

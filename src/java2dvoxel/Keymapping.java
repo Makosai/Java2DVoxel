@@ -36,30 +36,30 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
             switch(key) {
                 // Movement
                 case 'w':
-                    Java2DVoxel.renderer.controller.step(Directions.NORTH);
+                    Java2DVoxel.renderer.player.step(Directions.NORTH);
                     break;
                 case 'W':
-                    Java2DVoxel.renderer.controller.step(Directions.NORTH);
+                    Java2DVoxel.renderer.player.step(Directions.NORTH);
                     break;
 
                 case 'a':
-                    Java2DVoxel.renderer.controller.step(Directions.WEST);
+                    Java2DVoxel.renderer.player.step(Directions.WEST);
                     break;
                 case 'A':
-                    Java2DVoxel.renderer.controller.step(Directions.WEST);
+                    Java2DVoxel.renderer.player.step(Directions.WEST);
                     break;
 
                 case 's':
-                    Java2DVoxel.renderer.controller.step(Directions.SOUTH);
+                    Java2DVoxel.renderer.player.step(Directions.SOUTH);
                     break;
                 case 'S':
-                    Java2DVoxel.renderer.controller.step(Directions.SOUTH);
+                    Java2DVoxel.renderer.player.step(Directions.SOUTH);
 
                 case 'd':
-                    Java2DVoxel.renderer.controller.step(Directions.EAST);
+                    Java2DVoxel.renderer.player.step(Directions.EAST);
                     break;
                 case 'D':
-                    Java2DVoxel.renderer.controller.step(Directions.EAST);
+                    Java2DVoxel.renderer.player.step(Directions.EAST);
                     break;
                 
                 default:
@@ -72,19 +72,19 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
         for(Integer key : codePressed) {
             switch(key) {
                 case KeyEvent.VK_UP:
-                    Java2DVoxel.renderer.controller.step(Directions.NORTH);
+                    Java2DVoxel.renderer.player.step(Directions.NORTH);
                     break;
 
                 case KeyEvent.VK_LEFT:
-                    Java2DVoxel.renderer.controller.step(Directions.WEST);
+                    Java2DVoxel.renderer.player.step(Directions.WEST);
                     break;
 
                 case KeyEvent.VK_DOWN:
-                    Java2DVoxel.renderer.controller.step(Directions.SOUTH);
+                    Java2DVoxel.renderer.player.step(Directions.SOUTH);
                     break;
 
                 case KeyEvent.VK_RIGHT:
-                    Java2DVoxel.renderer.controller.step(Directions.EAST);
+                    Java2DVoxel.renderer.player.step(Directions.EAST);
                     break;
 
                 default:
@@ -94,7 +94,7 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
         }
         
         System.out.println(e.getKeyChar() + " has been pressed.");
-        Java2DVoxel.renderer.controller.move(1, 1);
+        Java2DVoxel.renderer.player.move(1, 1);
     }
 
     /** Handle the key released event from the text field. */
@@ -108,7 +108,7 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
         }
 
         System.out.println(e.getKeyChar() + " has been released.");
-        Java2DVoxel.renderer.controller.move(1, 1);
+        Java2DVoxel.renderer.player.move(1, 1);
     }
 
     /** Handle the button click. */

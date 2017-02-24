@@ -20,8 +20,7 @@ import java.awt.Graphics2D;
  */
 public class Renderer extends JFrame {
     public static ArrayList<Map> maps = new ArrayList<>();
-    public static GameObject player = new GameObject();
-    public static Player controller = new Player();
+    public static Player player = new Player(new Sprite("rsc/mob.png"));
     public static Camera cam = new Camera(player);
     
     // Configurations
@@ -51,7 +50,6 @@ public class Renderer extends JFrame {
         setSize(insets.left + windowWidth + insets.right, insets.top + windowHeight + insets.bottom);
         
         backBuffer = new BufferedImage(windowWidth, windowHeight, BufferedImage.TYPE_INT_RGB);
-        //input = new InputHandler(this);
         addKeyListener(Java2DVoxel.keymapping);
     }
     
@@ -73,9 +71,8 @@ public class Renderer extends JFrame {
                 }
             }
         }
-        
-        //bbg.drawOval(cam.x, cam.y, 32, 32);
-        controller.draw();
+
+        player.draw();
         
         g.drawImage(backBuffer, insets.left, insets.top, this);
     }
@@ -87,8 +84,13 @@ public class Renderer extends JFrame {
      * @param map The map to store this object on.
      * @param layer The layer in which to draw this object.
      */
-    public void add(int x, int y, int map, int layer) {
+    public void add(int x, int y, int map, boolean density, String img) {
+        Tile tile = maps.get(map).data[x][y];
+        if(tile == null) tile = new Tile();
+        GameObject gO = new GameObject(x, y, new Sprite("rsc/" + img));
+        tile.data.add(gO);
         
+        maps.get(map).data[x][y] = tile;
     }
     
     /**
@@ -108,19 +110,9 @@ public class Renderer extends JFrame {
      * @param ySize How large the map is on the y-axis.
      */
     public final void generateMap(int xSize, int ySize) {
-        Map newMap = new Map(xSize, ySize);
+        maps.add(new Map(xSize, ySize));
         
-        Tile newTile1 = new Tile();
-        GameObject newGo1 = new GameObject(new Sprite("rsc/tile.png"));
-        newTile1.data.add(newGo1);
-        
-        Tile newTile2 = new Tile();
-        GameObject newGo2 = new GameObject(5, 5, new Sprite("rsc/block.png"));
-        newTile2.data.add(newGo2);
-        
-        newMap.data[0][0] = newTile1;
-        newMap.data[5][5] = newTile2;
-        
-        maps.add(newMap);
+        add(0, 0, 0, false, "tile.png");
+        add(5, 5, 0, true, "block.png");
     }
 }
