@@ -18,7 +18,7 @@ import java2dvoxel.Enums.Directions;
  *
  * @author Kristopher Ali
  */
-public class Keymapping extends JFrame implements KeyListener, ActionListener {
+public class Keymapping extends JFrame implements MouseListener, KeyListener, ActionListener {
     // Set of currently pressed keys
     private final Set<Character> charPressed = new HashSet<Character>();
     private final Set<Integer> codePressed = new HashSet<Integer>();
@@ -120,5 +120,28 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
 
         //Return the focus to the typing area.
         //typingArea.requestFocusInWindow();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("Mouse clicked.");
+        e.getXOnScreen();
+        e.getYOnScreen(); // Use these and multiply by Constants.WORLD_SIZE to determine what tile they clicked.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }

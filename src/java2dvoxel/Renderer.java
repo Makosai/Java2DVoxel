@@ -51,6 +51,7 @@ public class Renderer extends JFrame {
         
         backBuffer = new BufferedImage(windowWidth, windowHeight, BufferedImage.TYPE_INT_RGB);
         addKeyListener(Java2DVoxel.keymapping);
+        addMouseListener(Java2DVoxel.keymapping);
     }
     
     void draw() {
