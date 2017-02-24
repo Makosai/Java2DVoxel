@@ -24,8 +24,6 @@ public class GameObject {
     
     public GameObject(Sprite newSprite) {
         sprite = newSprite;
-        
-        System.out.println(eyed);
     }
     
     public GameObject(int x, int y, Sprite newSprite) {

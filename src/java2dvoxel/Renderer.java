@@ -66,7 +66,7 @@ public class Renderer extends JFrame {
                 for(Tile y : x) {
                     if(y != null && y.data.size() > 0) {
                         y.data.get(0).draw();
-                        System.out.println("drew");
+                        //System.out.println("drew");
                     }
                 }
             }

@@ -63,6 +63,7 @@ public class Keymapping extends JFrame implements KeyListener, ActionListener {
                     break;
                 
                 default:
+                    System.out.println(e.getKeyCode());
                     charPressed.remove(e.getKeyChar());
                     codePressed.add(e.getKeyCode());
                     break;
