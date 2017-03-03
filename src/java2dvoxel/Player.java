@@ -14,34 +14,56 @@ import java2dvoxel.Enums.Directions;
  * @author Kristopher Ali
  */
 public class Player extends GameObject {
-    boolean eyed = true;
+    public boolean eyed = true;
+    public boolean density = true;
 
     Player(Sprite newSprite) {
         super(newSprite);
     }
     
     public void changePos(int x, int y) {
+        Map map = renderer.maps.get(this.z);
+        
         if(x != 0) {
             this.x += x;
-            if(this.x > renderer.maps.get(this.z).sizeX) {
-                //this.x = renderer.maps.get(this.z).sizeX;
+            if(this.x > map.sizeX) {
+                this.x = map.sizeX;
             }
             if(this.x < 0) {
                 this.x = 0;
             }
+            
             renderer.cam.x = this.x;
         }
         
         if(y != 0) {
             this.y += y;
-            if(this.y > renderer.maps.get(this.z).sizeY) {
-                //this.y = renderer.maps.get(this.z).sizeY;
+            if(this.y > map.sizeY) {
+                this.y = map.sizeY;
             }
             if(this.y < 0) {
                 this.y = 0;
             }
+
             renderer.cam.y = this.y;
         }
+        
+        // If they are dense, make them collidable.
+        // If they are not dense, allow them to go through other dense objects.
+        // As well as other non-dense objects.
+        if(density) {
+            for(GameObject gO : map.data[this.x][this.y].data) {
+                if(gO.density) {
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                }
+            }
+            
+            renderer.cam.x = this.x;
+            renderer.cam.y = this.y;
+        }
+        
     }
     
     public void wrapPlayer() {

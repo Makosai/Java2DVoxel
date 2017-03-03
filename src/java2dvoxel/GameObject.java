@@ -14,7 +14,8 @@ import java.awt.Image;
  * @author Kristopher Ali
  */
 public class GameObject {
-    boolean eyed = false;
+    public boolean eyed = false;
+    public boolean density = false;
     public int x = 0, y = 0, z = 0;
     public Sprite sprite;
     

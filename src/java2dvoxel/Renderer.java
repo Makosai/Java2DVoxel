@@ -89,6 +89,7 @@ public class Renderer extends JFrame {
         Tile tile = maps.get(map).data[x][y];
         if(tile == null) tile = new Tile();
         GameObject gO = new GameObject(x, y, new Sprite("rsc/" + img));
+        gO.density = density;
         tile.data.add(gO);
         
         maps.get(map).data[x][y] = tile;
@@ -115,5 +116,6 @@ public class Renderer extends JFrame {
         
         add(0, 0, 0, false, "tile.png");
         add(5, 5, 0, true, "block.png");
+        add(3, 7, 0, true, "block.png");
     }
 }
