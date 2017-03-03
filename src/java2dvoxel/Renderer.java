@@ -117,5 +117,27 @@ public class Renderer extends JFrame {
         add(0, 0, 0, false, "tile.png");
         add(5, 5, 0, true, "block.png");
         add(3, 7, 0, true, "block.png");
+        
+        /*
+        TODO: The real map generation should meet the following requirements:
+        - Creates rooms
+        - Rooms have a min/max x/y size
+        - Rooms have a min/max margin size
+        - Paths connect rooms
+        - 1 or more openings in a random side (except corners)
+        
+        Here's how you can go about generating it:
+        - Create a rectangular / square room at 0,0
+        - Set the size of the map to this room + the margin of that room
+        - Create another room and move it to the right of the previous room
+        - Repeat this process until it hits the max map size
+        - The last room must not make the map bigger than the max map size
+        and must match the min / max room size
+        - Move to the next row and repeat the process again, left to right.
+        - This time, make sure the position and size of it doesn't conflict
+        with the previous row (calculations required).
+        - Once every row is filled, connect them with corridors.
+        - If possible, make the corridors winding and have variating sizes.
+        */
     }
 }
