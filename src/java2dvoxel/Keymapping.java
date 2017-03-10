@@ -95,7 +95,6 @@ public class Keymapping extends JFrame implements MouseListener, KeyListener, Ac
         }
         
         System.out.println(e.getKeyChar() + " has been pressed.");
-        Java2DVoxel.renderer.player.move(1, 1);
     }
 
     /** Handle the key released event from the text field. */
@@ -109,7 +108,6 @@ public class Keymapping extends JFrame implements MouseListener, KeyListener, Ac
         }
 
         System.out.println(e.getKeyChar() + " has been released.");
-        Java2DVoxel.renderer.player.move(1, 1);
     }
 
     /** Handle the button click. */

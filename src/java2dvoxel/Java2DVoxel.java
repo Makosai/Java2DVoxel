@@ -47,7 +47,7 @@ public class Java2DVoxel {
             timer = new java.util.Timer();
             timer.schedule(new EngineLoop(), 0, (lastTime - System.nanoTime() + optimalTime) / 1000000);
         
-            renderer.generateMap(50,50);
+            renderer.generateMap(100,100);
         }
         
         /**

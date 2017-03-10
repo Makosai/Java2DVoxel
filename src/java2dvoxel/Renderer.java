@@ -14,6 +14,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import java.awt.Graphics2D;
 
+import java2dvoxel.Essentials;
+
 /**
  * Renders the current map.
  * @author Kristopher Ali
@@ -95,6 +97,16 @@ public class Renderer extends JFrame {
         maps.get(map).data[x][y] = tile;
     }
     
+    public void add(int x, int y, Map map, boolean density, String img) {
+        Tile tile = map.data[x][y];
+        if(tile == null) tile = new Tile();
+        GameObject gO = new GameObject(x, y, new Sprite("rsc/" + img));
+        gO.density = density;
+        tile.data.add(gO);
+        
+        map.data[x][y] = tile;
+    }
+    
     /**
      * Adds a GUI to the screen.
      * @param x The x-coordinate of the GUI.
@@ -118,6 +130,12 @@ public class Renderer extends JFrame {
         add(5, 5, 0, true, "block.png");
         add(3, 7, 0, true, "block.png");
         
+        Map map = maps.get(0);
+        Room testRoom = createRoom(map, map.sizeX / 2, map.sizeY / 2, Essentials.rand(3, 15), Essentials.rand(3, 15));
+        player.move(testRoom.xCenter, testRoom.yCenter);
+        // next room should be 16 tiles away from the previous room and all other rooms
+        // since they're all square, you can do this by scanning in a straight line
+        // in 4 different directions to check for any existing tiles in the map
         /*
         TODO: The real map generation should meet the following requirements:
         - Creates rooms
@@ -139,5 +157,53 @@ public class Renderer extends JFrame {
         - Once every row is filled, connect them with corridors.
         - If possible, make the corridors winding and have variating sizes.
         */
+    }
+    
+    /**
+     * Creates a room.
+     * @param map The map to create the room in.
+     * @param xCenter The x-location to start in the map.
+     * @param yCenter The y-location to start in the map.
+     * @param xSize The horizontal size from the center (inclusive).
+     * @param ySize The vertical size from the center (inclusive),
+     * @return The room's saved data.
+     */
+    public Room createRoom(Map map, int xCenter, int yCenter, int xSize, int ySize) {
+        // Store the room's data.
+        Room room = new Room();
+        room.map = map;
+        room.xCenter = xCenter;
+        room.yCenter = yCenter;
+        room.xSize = xSize;
+        room.ySize = ySize;
+        
+        //Fill Center
+        for(int x = xCenter - xSize + 1; x < xCenter + xSize; x++) {
+            for(int y = yCenter - ySize + 1; y < yCenter + ySize; y++) {
+                add(x, y, map, false, "tile.png");
+            }
+        }
+        
+        //Top (corners inclusive)
+        for(int x = xCenter - xSize; x <= xCenter + xSize; x++) {
+            add(x, yCenter - ySize, map, true, "block.png");
+        }
+        
+        //Bottom (corners inclusive)
+        for(int x = xCenter - xSize; x <= xCenter + xSize; x++) {
+            add(x, yCenter + ySize, map, true, "block.png");
+        }
+        
+        //Left (corners exclusive)
+        for(int y = yCenter - ySize + 1; y < yCenter + ySize; y++) {
+            add(xCenter + xSize, y, map, true, "block.png");
+        }
+        
+        //Right (corners exclusive)
+        for(int y = yCenter - ySize + 1; y < yCenter + ySize; y++) {
+            add(xCenter - xSize, y, map, true, "block.png");
+        }
+        
+        return room;
     }
 }

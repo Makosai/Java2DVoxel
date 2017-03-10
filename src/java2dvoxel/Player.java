@@ -70,8 +70,13 @@ public class Player extends GameObject {
         
     }
     
+    /**
+     * Moves the player to a location forcefully.
+     * @param x
+     * @param y 
+     */
     public void move(int x, int y) {
-        
+        changePos(x - this.x, y - this.y);
     }
     
     /**
