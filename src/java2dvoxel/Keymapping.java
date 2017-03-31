@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.*;
 import java2dvoxel.Enums.Directions;
+import java.util.ArrayList;
 
 /**
  *
@@ -122,9 +123,21 @@ public class Keymapping extends JFrame implements MouseListener, KeyListener, Ac
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Mouse clicked.");
-        e.getXOnScreen();
-        e.getYOnScreen(); // Use these and multiply by Constants.WORLD_SIZE to determine what tile they clicked.
+        int xOffset = 7;
+        int yOffset = 30;
+        int pOffset = 14;
+        
+        Renderer renderer = Java2DVoxel.renderer;
+        int rawX = (e.getX() - xOffset) / Constants.WORLD_SIZE;
+        int mouseX = renderer.player.x - (pOffset - rawX);
+        int rawY = (e.getY() - yOffset) / Constants.WORLD_SIZE;
+        int mouseY = renderer.player.y - (pOffset - rawY);
+        
+        // Test: Delete the tile at this location
+        Map map = renderer.maps.get(0);
+        ArrayList<GameObject> data = map.data[mouseX][mouseY].data;
+        if(data.size() > 0)
+            data.remove(0);
     }
 
     @Override
